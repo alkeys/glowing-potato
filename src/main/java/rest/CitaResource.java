@@ -6,7 +6,6 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -40,6 +39,7 @@ public class CitaResource {
 
     // Listar citas con paginación
     @GET
+    @Path("/listar/rango")
     public Response listarCitas(@QueryParam("start") @DefaultValue("0") int start,
                                 @QueryParam("size") @DefaultValue("50") int size) {
         try {
@@ -67,7 +67,7 @@ public class CitaResource {
 
     // Obtener por ID
     @GET
-    @Path("/{id}")
+    @Path("/obtener/{id}")
     public Response obtenerPorId(@PathParam("id") Integer id) {
         if (id == null) {
             return Response.status(Response.Status.BAD_REQUEST)
@@ -132,7 +132,7 @@ public class CitaResource {
 
     // Actualizar cita
     @PUT
-    @Path("/{id}")
+    @Path("/actualizar/{id}")
     @Transactional
     public Response actualizarCita(@PathParam("id") Integer id, Cita cita) {
         if (id == null || cita == null) {
@@ -165,7 +165,7 @@ public class CitaResource {
 
     // Eliminar cita
     @DELETE
-    @Path("/{id}")
+    @Path("/Eliminar/{id}")
     @Transactional
     public Response eliminarCita(@PathParam("id") Integer id) {
         if (id == null) {

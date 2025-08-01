@@ -1,8 +1,6 @@
 package rest;
 
-
 import control.UsuariosDAO;
-import entity.Cita;
 import entity.Usuario;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
