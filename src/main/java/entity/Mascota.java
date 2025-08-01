@@ -1,9 +1,6 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -68,15 +65,18 @@ public class Mascota {
 
     @OneToMany(mappedBy = "idMascota", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference(value = "mascota-citas") // 👈 Este lado controla la serialización
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY) // solo lectura para evitar bucles infinitos
     private List<Cita> citas;
 
 
 
     @OneToMany(mappedBy = "idMascota", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference(value = "mascota-vacunas")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY) // solo lectura para evitar bucles infinitos
     private List<Vacuna> vacunas;
 
     @OneToMany(mappedBy = "idMascota", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference(value = "mascota-historiales")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY) // solo lectura para evitar bucles infinitos
     private List<HistorialMedico> historialMedico;
 }
