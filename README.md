@@ -31,9 +31,13 @@ credenciales de acceso a la base de datos:
 - **Usuario**: admin
 - **Contraseña**: admin
 - Puerto: 5432
-- Para ejecutar el contenedor de PostgreSQL, asegúrate de tener Docker instalado y ejecuta el siguiente comando:
+- Para Crear el contenedor de PostgreSQL, asegúrate de tener Docker instalado y ejecuta el siguiente comando:
 ```bash
 docker run --name mascotas -e POSTGRES_DB=mascotas -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -p 5432:5432 -d postgres
+```
+#para correr el contenedor de PostgreSQL, asegúrate de tener Docker instalado y ejecuta el siguiente comando:
+```bash
+docker start mascotas
 ```
 
 # Creación de contendor de Docker para el Servidor de Desarrollo de Liberty 
