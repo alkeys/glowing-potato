@@ -40,8 +40,23 @@ docker run --name mascotas -e POSTGRES_DB=mascotas -e POSTGRES_USER=admin -e POS
 docker start mascotas
 ```
 
+
+#Generación del Keystore esto sirve para generar un certificado SSL para el servidor de desarrollo de Liberty.
+```bash
+keytool -genkeypair -alias appkey \
+-keyalg RSA -keysize 2048 -validity 365 \
+-keystore keystore.p12 -storetype PKCS12 \
+-storepass secret -keypass secret \
+-dname "CN=localhost, OU=dev, O=empresa, L=ciudad, ST=estado, C=US"
+```
+
+
+
 # Creación de contendor de Docker para el Servidor de Desarrollo de Liberty 
 Para crear un contenedor de Docker para el servidor de desarrollo de Liberty, puedes utilizar el siguiente comando:
+```bash
+mvn clean package
+```
 
 ```bash
 docker build -t veterinaria .
@@ -51,5 +66,26 @@ docker build -t veterinaria .
 Para ejecutar el contenedor de Docker que has creado, utiliza el siguiente comando:
 
 ```bash 
-docker run -p 9090:9090 -p 9443:9443 veterinaria
+docker run --name veterinaria_app -p 9090:9090 -p 9443:9443 veterinaria
 ```
+# para parar el contenedor de Docker, puedes utilizar el siguiente comando:
+
+```bash
+docker stop veterinaria_app
+```
+
+
+# para ocupar docker compose
+recuerda que debes tener instalado Docker Compose en tu sistema. 
+y modificar el servidor de desarrollo de Liberty para que utilice la base de datos PostgreSQL.
+serverName="db"
+```bash
+docker-compose up --build
+```
+# Detener el Contenedor de Docker
+Para detener el contenedor de Docker, puedes utilizar el siguiente comando:
+
+```bash 
+docker-compose down
+```
+
